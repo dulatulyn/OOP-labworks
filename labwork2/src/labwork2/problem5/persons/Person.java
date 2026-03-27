@@ -2,7 +2,9 @@ package labwork2.problem5.persons;
 
 import labwork2.problem5.animals.Animal;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable, Comparable<Person> {
     String name;
     int age;
     Animal pet;
@@ -11,6 +13,9 @@ public abstract class Person {
         this.name = name;
         this.age = age;
     }
+
+    public String getName() { return name; }
+    public int getAge() { return age; }
 
     public abstract void assignPet(Animal pet);
     public abstract void removePet();
@@ -33,6 +38,11 @@ public abstract class Person {
         Animal temp = other.pet;
         other.removePet();
         this.assignPet(temp);
+    }
+
+    @Override
+    public int compareTo(Person other) {
+        return Integer.compare(this.age, other.age);
     }
 
     public String toString() {
